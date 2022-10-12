@@ -3,6 +3,12 @@ import { QueryFunctionContext, useQuery } from "react-query"
 import { PhotoCard } from "./components/PhotoCard";
 import { Photo } from "./interfaces/Photo";
 
+import { Heading, SimpleGrid, GridItem, Button } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/layout";
+import { Loading } from "./components/Loading";
+
+
+
 export const App = () => {
 
 
@@ -22,7 +28,7 @@ export const App = () => {
   });
 
   if (status === 'loading') {
-    return <p>Recuperando los productos...</p>;
+    return <Loading msg="Cargando...." />;
   }
 
   if (status === 'error') {
@@ -30,20 +36,34 @@ export const App = () => {
   }
 
   return <div>
-    <h2>List Photos {page}</h2>
-    <div>
-      <button onClick={() => {
-        setPage((page) => {
-          return page === 1 ? 1 : page - 1;
-        })
-      }}>Previous</button>
-      <button onClick={() => setPage(page + 1)}>Next</button>
-    </div>
-    <div className="photos">
+    <Heading as='h1' size='2xl' noOfLines={1} textAlign="center" marginTop={4}>
+      List Photos {page}
+    </Heading>
+
+    <Box display={"flex"} justifyContent="center" marginTop={4}>
+      <Box className="">
+
+        <Button onClick={() => {
+          setPage((page) => {
+            return page === 1 ? 1 : page - 1;
+          })
+        }} colorScheme='pink' size='md' marginRight={3}>
+          Previous
+        </Button>
+
+        <Button onClick={() => setPage(page + 1)} colorScheme='pink' size='md'>
+          Next
+        </Button>
+      </Box>
+
+    </Box>
+    <SimpleGrid columns={[1, 4]} gap={"4"} padding="8">
       {data?.map(prod => (
-        <PhotoCard photo={prod} key={prod.id} />
+        <GridItem w='100%' key={prod.id} display="block">
+          <PhotoCard photo={prod} />
+        </GridItem >
       ))}
-    </div>
+    </SimpleGrid>
   </div>
 }
 
