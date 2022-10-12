@@ -30,14 +30,14 @@ export const App = () => {
   }
 
   return <div>
-    <h2>Lista de productos {page}</h2>
+    <h2>List Photos {page}</h2>
     <div>
       <button onClick={() => {
         setPage((page) => {
           return page === 1 ? 1 : page - 1;
         })
-      }}>Anterior</button>
-      <button onClick={() => setPage(page + 1)}>Siguiente</button>
+      }}>Previous</button>
+      <button onClick={() => setPage(page + 1)}>Next</button>
     </div>
     <div className="photos">
       {data?.map(prod => (
