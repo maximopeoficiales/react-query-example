@@ -18,7 +18,7 @@ export const App = () => {
     let page = +queryKey[1];
     const limit = 5;
     const start = page === 1 ? 0 : ((page * limit) - limit);
-    const response = await fetch(`http://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
     const data = response.json();
     return data as unknown as Photo[];
   }
